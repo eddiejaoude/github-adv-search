@@ -112,26 +112,33 @@ div#main {
 }
 
 /* RESULTS */
-ul#results {
+table#results {
+    width:100%;
+}
+table#results thead {
 
 }
-ul#results li {
-	margin-bottom:0.4em;
-}
-ul#results li div.overview {
-	background:#fff;
-	border:1px solid #ccc;
-	padding:0.9em;
-}
-ul#results li div.overview p {
-	font-size:1.3em;
-}
-ul#results li div.overview table {
+table#results thead tr {
 
 }
-ul#results li div.overview table tr {
-	border-top:1px solid #ccc;
+table#results thead tr td {
+    border-bottom:3px solid #fff;
+    font-size:1.6em;
+    padding:0.3em 0.4em;
 }
-ul#results li div.overview table tr td.project_stats {
-	width:7em;
+table#results thead tr td span.result_statistics {
+    font-size:0.8em;
+}
+table#results tbody {
+
+}
+table#results tbody tr {
+
+}
+table#results tbody tr.hover {
+    background:#fff;
+}
+table#results tbody tr td {
+    border-bottom:1px solid #fff;
+    padding:0.3em 0em;
 }

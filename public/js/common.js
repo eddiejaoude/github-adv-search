@@ -7,6 +7,13 @@ $(document).ready(function() {
         $(this).removeClass('active');
     });
 
-
+    // result table
+    $('table#results tbody tr').hover(
+    function() {
+        $(this).addClass('hover');
+    },
+    function() {
+        $(this).removeClass('hover');
+    });
     
 });
