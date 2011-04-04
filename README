@@ -1,1 +1,12 @@
-Planning stages
+Still in the Planning stages...
+
+This project plans to extend GitHub's search by giving the user (un-authenticated) additional abilities:
+- sorting/ordering by forks/watchers/activity etc
+- filter results further
+
+
+== Future plans ==
+Authenticated users
+- save search parameters
+- notification alert (via email) when a new project is added that matches criteria
+- bookmark projects, will not affect your watch list & will not appear in your feed
