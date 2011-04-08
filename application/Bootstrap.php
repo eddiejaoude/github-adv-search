@@ -43,6 +43,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         # save new database adapter to registry
         $this->_registry->auth->_hash = $this->_config->auth->hash;
         $this->_registry->logs = $this->_config->logs;
+        $this->_registry->github = $this->_config->github;
     }
 
     /**
