@@ -9,35 +9,38 @@
     <table id="results">
         <thead>
             <tr>
-                <td>Project <span class="result_statistics">( 250 results )</span></td>
+                <td>Project <span class="result_statistics">( <?php echo count($this->repos); ?> )</span></td>
                 <td>Owner</td>
+                <td>Language</td>
                 <td>Activity</td>
+                <td>Created</td>
                 <td>Watchers</td>
                 <td>Forks</td>
                 <td>Issues</td>
-                <td>Wiki</td>
-                <td>Pull Requets</td>
+                <td>Score</td>
             </tr>
         </thead>
         <tbody>
             <?php
-            for ($i=1;$i<4;$i++) {
+            foreach ($this->repos as $k => $v) {
                 echo '
             <tr>
                 <td>
-                    <h3><a href="http://www.github.com">Zend-Framework--Doctrine-ORM--PHPUnit--Ant--Jenkins-CI--TDD-</a></h3>
-                    <p>Best practice Zend Framework skeleton with Doctrine2 integration : 100% code coverage & build scripts using TDD</p>
+                    <h3><a href="' . $v['url'] . '">' . $v['name'] . '</a></h3>
+                    ' . (!empty($v['description']) ? '<p>' . $v['description'] . '</p>' : null) . '
                 </td>
-                <td>Eddie Jaoude</td>
-                <td>3 days ago</td>
-                <td>6</td>
-                <td>5</td>
-                <td>4</td>
-                <td>3</td>
-                <td>2</td>
+                <td>' . $v['owner'] . '</td><!-- owner -->
+                <td>' . $v['language'] . '</td><!-- langauge -->
+                <td>' . $v['created'] . '</td><!-- created-->
+                <td>' . $v['pushed'] . '</td><!-- activity -->
+                <td>' . $v['watchers'] . '</td><!-- watchers -->
+                <td>' . $v['forks'] . '</td><!-- Forks -->
+                <td>' . $v['open_issues'] . '</td><!-- issues -->
+                <td>' . $v['score'] . '</td><!-- score -->
             </tr>';
             }
                 ?>
         </tbody>
     </table>
 </div>
+<?php var_dump($this->repos); ?>

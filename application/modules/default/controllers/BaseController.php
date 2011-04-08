@@ -25,6 +25,7 @@ abstract class BaseController extends Zend_Controller_Action {
         $registry = Zend_Registry::getInstance();
         $this->_em = $registry->doctrine->_em;
         $this->_logger = $registry->logger;
+        $this->_github = $registry->github;
     }
     
 

@@ -19,7 +19,7 @@ class IndexController extends BaseController
      */
     public function init()
     {
-        
+        parent::init();
     }
 
     /**
@@ -31,7 +31,9 @@ class IndexController extends BaseController
      *
      */
     public function indexAction() {
-        
+        $repos = $this->_em->getRepository('Default_Model_Search')->setCache($this->_github->cache->time)->search('github', 'php');
+
+        $this->view->repos = $repos;
     }
     
 
