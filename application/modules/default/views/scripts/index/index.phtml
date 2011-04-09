@@ -29,7 +29,7 @@
                     <h3><a href="' . $v['url'] . '">' . $v['name'] . '</a></h3>
                     ' . (!empty($v['description']) ? '<p>' . $v['description'] . '</p>' : null) . '
                 </td>
-                <td>' . $v['owner'] . '</td><!-- owner -->
+                <td><a href="https://github.com/' . $v['owner'] . '">' . $v['owner'] . '</a></td><!-- owner -->
                 <td>' . $v['language'] . '</td><!-- langauge -->
                 <td>' . $v['created'] . '</td><!-- created-->
                 <td>' . $v['pushed'] . '</td><!-- activity -->
