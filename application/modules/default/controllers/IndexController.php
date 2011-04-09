@@ -40,7 +40,9 @@ class IndexController extends BaseController
 
             # check validate form
             if ($form->isValid($data)) {
-                $repos = $this->_em->getRepository('Default_Model_Search')->setCache($this->_github->cache->time)->search($data['keyword'], $data['language']);
+                $repos = $this->_em->getRepository('Default_Model_Search')
+                        ->setCache($this->_github->cache->time)
+                        ->search($data['keyword'], $data['language'], $data['sort_by'], $data['order']);
             }
 
             # populate form

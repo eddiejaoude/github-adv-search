@@ -45,7 +45,7 @@ class Default_Form_Search extends Zend_Form {
                     'javascript' => 'JavaScript',
                     'lua' => 'Lua',
                     'objective-c' => 'Objective-C',
-                    'php" selected="selected' => 'PHP',
+                    'php' => 'PHP',
                     'perl' => 'Perl',
                     'python' => 'Python',
                     'ruby' => 'Ruby',
@@ -138,11 +138,38 @@ class Default_Form_Search extends Zend_Form {
                 )
         );
 
+        # sort
+        $sort = new Zend_Form_Element_Select('sort_by');
+        $sort->setLabel('Sort By');
+        $sort->setMultiOptions(
+                array(
+                    'id' => 'GitHub Natural',
+                    'name' => 'Project',
+                    'owner' => 'Owner',
+                    'activity' => 'Activity',
+                    'created' => 'Created',
+                    'watchers' => 'Watchers',
+                    'forks' => 'Forks',
+                    'issues' => 'Issues',
+                    'score' => 'GitHub Score',
+                    )
+                );
+
+        # order
+        $order = new Zend_Form_Element_Select('order');
+        $order->setLabel('Order');
+        $order->setMultiOptions(
+                array(
+                    'DESC' => 'Desc',
+                    'ASC' => 'ASC'
+                    )
+                );
+
         # Submit
         $submit = new Zend_Form_Element_Submit('search');
 
         # Create
-        $this->addElements(array($keyword, $language, $submit));
+        $this->addElements(array($keyword, $language, $sort, $submit));
     }
 
 }

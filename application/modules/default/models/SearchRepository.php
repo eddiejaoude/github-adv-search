@@ -45,27 +45,20 @@ class Default_Model_SearchRepository extends EntityRepository
      * @return           array $results
      *
      */
-    public function search($keyword, $language)
+    public function search($keyword, $language, $sort_by='id', $order='ASC')
     { 
         # filter data
-        if (empty($keyword) && empty($language)) {
-            throw new Exception('Keyword & Language required');
+        if (empty($keyword) && empty($language) && empty($sory_by) && empty($order)) {
+            throw new Exception('keyword, language, sort_by, order are all required');
         }
 
         // check cache
         $search_exists = $this->findOneBy(array('keyword' => (string) $keyword, 'language' => (string) $language));
         $now = new Zend_Date();
-        $now->sub('12', Zend_Date::HOUR);
-        if (count($search_exists) == 1 && $now->isEarlier($search_exists->getUpdatedAt())) {
-            $repositories_qb = $this->_em->createQueryBuilder();
-            $repositories_query = $repositories_qb->add('select', 'repository')
-                        ->add('from', 'Default_Model_Repository repository')
-                        ->add('where', 'repository.search_id = :id')
-                        ->setParameter('id', $search_exists->getId());
-            $result = $repositories_query->getQuery()
-                        ->getArrayResult();
-        } else {
-            # get data
+        $now->sub($this->cache, Zend_Date::HOUR);
+        if (count($search_exists) != 1 || $now->isLater($search_exists->getUpdatedAt())) {
+echo 'no cache';
+            # get new data
             $result = array();
             $page = 1;
             $github = new Github_Client();
@@ -125,6 +118,48 @@ class Default_Model_SearchRepository extends EntityRepository
             $this->_em->flush();
             
         }
+
+        # get data
+        $repositories_qb = $this->_em->createQueryBuilder();
+        $repositories_query = $repositories_qb->add('select', 'repository')
+                    ->add('from', 'Default_Model_Repository repository')
+                    ->add('where', 'repository.search_id = :id')
+                    ->setParameter('id', $search_exists->getId());
+
+        # sort
+        switch($sort_by) {
+            case 'id':
+                $repositories_query->add('orderBy', 'repository.id DESC');
+                break;
+            case 'name':
+                $repositories_query->add('orderBy', 'repository.name DESC');
+                break;
+            case 'owner':
+                $repositories_query->add('orderBy', 'repository.owner DESC');
+                break;
+            case 'activity':
+                $repositories_query->add('orderBy', 'repository.activity DESC');
+                break;
+            case 'created':
+                $repositories_query->add('orderBy', 'repository.created DESC');
+                break;
+            case 'watchers':
+                $repositories_query->add('orderBy', 'repository.watchers DESC');
+                break;
+            case 'forks':
+                $repositories_query->add('orderBy', 'repository.forks DESC');
+                break;
+            case 'issues':
+                $repositories_query->add('orderBy', 'repository.open_issues DESC');
+                break;
+            case 'score':
+                $repositories_query->add('orderBy', 'repository.score DESC');
+                break;
+        }
+
+        $result = $repositories_query->getQuery()
+                    ->getArrayResult();
+
         return $result;
     }
 
