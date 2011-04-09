@@ -115,6 +115,7 @@ class Default_Model_SearchRepository extends EntityRepository
                 $repository->setHasDownloads($v['has_downloads']);
                 $repository->setPushedAt($v['pushed_at']);
                 $repository->setScore($v['score']);
+                $repository->setUrl($v['url']);
                 $repository->setForks($v['forks']);
                 $repository->setCreated($v['created']);
                 $repository->setCreatedAt($v['created_at']);
