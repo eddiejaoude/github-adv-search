@@ -41,9 +41,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $this->_registry = Zend_Registry::getInstance();
 
         # save new database adapter to registry
-        $this->_registry->auth->_hash = $this->_config->auth->hash;
-        $this->_registry->logs = $this->_config->logs;
-        $this->_registry->github = $this->_config->github;
+        $this->_registry->config = $this->_config;
     }
 
     /**
@@ -56,8 +54,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      */
     protected function _initTmpDirectory() {
         # check tmp directory is writable
-        if (!is_writable($this->_registry->logs->tmpDir)) {
-            throw new Exception('Error: tmp dir is not writable ( ' . $this->_registry->logs->tmpDir . '), check folder/file permissions');
+        if (!is_writable($this->_registry->config->logs->tmpDir)) {
+            throw new Exception('Error: tmp dir is not writable ( ' . $this->_registry->config->logs->tmpDir . '), check folder/file permissions');
         }
     }
 
@@ -71,7 +69,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      */
     protected function _initLogger() {
         # log file
-        $error_log = $this->_registry->logs->tmpDir . DIRECTORY_SEPARATOR . $this->_registry->logs->error;
+        $error_log = $this->_registry->config->logs->tmpDir . DIRECTORY_SEPARATOR . $this->_registry->config->logs->error;
 
         # create log file if does not exist
         if (!file_exists($error_log)) { 
@@ -125,6 +123,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $config->setAutoGenerateProxyClasses(true);
 
         # database connection
+        $this->_registry->doctrine = new stdClass;
         $this->_registry->doctrine->_em = EntityManager::create($this->_config->doctrine->connection->toArray(), $config);
     }
 

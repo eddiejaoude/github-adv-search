@@ -57,7 +57,6 @@ class Default_Model_SearchRepository extends EntityRepository
         $now = new Zend_Date();
         $now->sub($this->cache, Zend_Date::HOUR);
         if (count($search_exists) != 1 || $now->isLater($search_exists->getUpdatedAt())) {
-echo 'no cache';
             # get new data
             $result = array();
             $page = 1;
@@ -124,7 +123,7 @@ echo 'no cache';
         $repositories_query = $repositories_qb->add('select', 'repository')
                     ->add('from', 'Default_Model_Repository repository')
                     ->add('where', 'repository.search_id = :id')
-                    ->setParameter('id', $search_exists->getId());
+                    ->setParameter('id', $search_id);
 
         # sort
         switch($sort_by) {
