@@ -54,6 +54,7 @@ class Default_Model_SearchRepository extends EntityRepository
 
         // check cache
         $search_exists = $this->findOneBy(array('keyword' => (string) $keyword, 'language' => (string) $language));
+        if (count($search_exists) == 1) { $search_id = $search_exists->getId(); }
         $now = new Zend_Date();
         $now->sub($this->cache, Zend_Date::HOUR);
         if (count($search_exists) != 1 || $now->isLater($search_exists->getUpdatedAt())) {
@@ -136,11 +137,11 @@ class Default_Model_SearchRepository extends EntityRepository
             case 'owner':
                 $repositories_query->add('orderBy', 'repository.owner DESC');
                 break;
-            case 'activity':
-                $repositories_query->add('orderBy', 'repository.activity DESC');
+            case 'pushed_at':
+                $repositories_query->add('orderBy', 'repository.pushed_at DESC');
                 break;
-            case 'created':
-                $repositories_query->add('orderBy', 'repository.created DESC');
+            case 'created_at':
+                $repositories_query->add('orderBy', 'repository.created_at DESC');
                 break;
             case 'watchers':
                 $repositories_query->add('orderBy', 'repository.watchers DESC');

@@ -22,8 +22,8 @@ if (!empty($this->repos)) {
             <tbody>
                 <?php
                 foreach ($this->repos as $k => $v) {
-                    $pushed = new Zend_Date($v['pushed']);
-                    $created = new Zend_Date($v['created']);
+                    $pushed = new Zend_Date($v['pushed_at']);
+                    $created = new Zend_Date($v['created_at']);
                     echo '
                 <tr>
                     <td>
