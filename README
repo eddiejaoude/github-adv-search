@@ -1,11 +1,17 @@
+--------------------------------------------------------
+GOAL - GITHUB ADVANCED SEARCH
+--------------------------------------------------------
 Proof of concept complete, demo http://github.jaoudestudios.com/
 
 This project plans to extend GitHub's search by giving the user (un-authenticated) additional abilities:
 - sorting/ordering by forks/watchers/activity etc
 - filter results further
 
+Follow the latest updates of this project on twitter http://twitter.com/eddiejaoude_git
 
-== Future plans ==
+--------------------------------------------------------
+FUTURE
+--------------------------------------------------------
 Authenticated users
 - save search parameters
 - notification alert (via email) when a new project is added that matches criteria
