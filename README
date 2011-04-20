@@ -2,6 +2,7 @@
 GOAL - GITHUB ADVANCED SEARCH
 --------------------------------------------------------
 Proof of concept complete, demo http://github.jaoudestudios.com/
+Forked from https://github.com/eddiejaoude/Zend-Framework--Doctrine-ORM--PHPUnit--Ant--Jenkins-CI--TDD-
 
 This project plans to extend GitHub's search by giving the user (un-authenticated) additional abilities:
 - sorting/ordering by forks/watchers/activity etc
